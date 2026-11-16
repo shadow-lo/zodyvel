@@ -1,0 +1,31 @@
+{
+  "name": "zodyvel",
+  "version": "0.9.0",
+  "private": true,
+  "type": "module",
+  "description": "Zodyvel: Windows ekranının üst ortasında yaşayan, AI ajanlarını, müziği ve sistem yükünü gösteren hafif ada",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 1420 --strictPort",
+    "build": "vite build",
+    "check": "svelte-check --tsconfig ./tsconfig.json --fail-on-warnings",
+    "test": "vitest run",
+    "tauri": "tauri",
+    "app": "tauri dev",
+    "package": "tauri build",
+    "exe": "tauri build --no-bundle && node scripts/copy-exe.mjs",
+    "release": "node scripts/release.mjs"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.12.3"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@tauri-apps/cli": "^2.12.2",
+    "@tsconfig/svelte": "^5.0.8",
+    "svelte": "^5.57.2",
+    "svelte-check": "^4.7.6",
+    "typescript": "^6.0.3",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.4"
+  }
+}

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-reminders-sync"
+description = "Enables the reminders_sync command without any pre-configured scope."
+commands.allow = ["reminders_sync"]
+
+[[permission]]
+identifier = "deny-reminders-sync"
+description = "Denies the reminders_sync command without any pre-configured scope."
+commands.deny = ["reminders_sync"]

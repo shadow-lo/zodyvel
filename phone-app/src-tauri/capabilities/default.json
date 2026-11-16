@@ -1,0 +1,11 @@
+{
+  "$schema": "../gen/schemas/mobile-schema.json",
+  "identifier": "default",
+  "description": "Ana pencere: temel olaylar ve QR tarayıcı. Keystore eklentisine webview'dan izin YOK.",
+  "windows": ["main"],
+  "platforms": ["android", "iOS"],
+  "permissions": [
+    "core:default",
+    "barcode-scanner:default"
+  ]
+}

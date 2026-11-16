@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Ada, ayarlar ve güncelleme pencerelerinin kullanabileceği en dar izin seti",
+  "windows": ["island", "settings", "update"],
+  "permissions": ["core:event:default", "core:app:default"]
+}

@@ -1,0 +1,13 @@
+# Automatically generated - DO NOT EDIT!
+
+"$schema" = "../../schemas/schema.json"
+
+[[permission]]
+identifier = "allow-battery-exempt"
+description = "Enables the battery_exempt command without any pre-configured scope."
+commands.allow = ["battery_exempt"]
+
+[[permission]]
+identifier = "deny-battery-exempt"
+description = "Denies the battery_exempt command without any pre-configured scope."
+commands.deny = ["battery_exempt"]

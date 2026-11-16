@@ -1,0 +1,28 @@
+[package]
+name = "zodyvel-phone-proto"
+version = "0.0.1"
+edition = "2021"
+description = "T1 denemesi: Noise XX ile eşleştirme ve şifreli kanal (Zodyvel telefon köprüsü)"
+
+[dependencies]
+snow = "0.9"
+rand = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# T2: telefon eylemleri cihaz anahtarıyla imzalanır (Android Keystore ECDSA P-256, DER imza).
+p256 = { version = "0.13", default-features = false, features = ["ecdsa", "std"] }
+# T2: yerel ağda duyuru (_zodyvel._tcp); yalnız köprü açıkken çalışır.
+mdns-sd = { version = "0.11", optional = true }
+# O9: Key Attestation zinciri doğrulaması (yalnız masaüstü köprüsü). Google kökleri RSA-4096 ve ECDSA P-384;
+# ara sertifikalar P-256/P-384/RSA olabilir. rsa yalnız açık anahtar doğrulamasında kullanılır (gizli işlem yok).
+sha2 = { version = "0.10", features = ["oid"], optional = true }
+p384 = { version = "0.13", default-features = false, features = ["ecdsa", "std"], optional = true }
+rsa = { version = "0.9", default-features = false, features = ["std"], optional = true }
+# T2: eşleştirme QR görseli (SVG metni).
+qrcode = { version = "0.14", default-features = false, features = ["svg"], optional = true }
+
+
+[features]
+# Masaüstü köprüsü (dinleyici, ağ denetimi, mDNS duyurusu, QR çizimi). Telefon uygulaması bunu kapatır: yalnız istemci ve ileti biçimi.
+default = ["bridge"]
+bridge = ["dep:mdns-sd", "dep:qrcode", "dep:sha2", "dep:p384", "dep:rsa"]

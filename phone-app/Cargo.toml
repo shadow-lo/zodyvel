@@ -1,0 +1,11 @@
+# Zodyvel telefon uygulaması (Android, Tauri 2 mobil). Masaüstü derlemesinden ayrı çalışma alanı.
+[workspace]
+resolver = "2"
+members = ["core", "src-tauri", "plugins/keystore"]
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true

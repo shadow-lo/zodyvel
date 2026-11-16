@@ -1,0 +1,27 @@
+[package]
+name = "zodyvel-phone"
+version = "0.1.0"
+edition = "2021"
+description = "Zodyvel telefon uygulaması (Android, Tauri 2)"
+
+[lib]
+name = "zodyvel_phone_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+zodyvel-phone-core = { path = "../core" }
+zodyvel-phone-proto = { path = "../../src-tauri/phone-proto", default-features = false }
+tauri-plugin-zkeystore = { path = "../plugins/keystore" }
+
+# G3: ekransız başlatma (telefon açılışı) için Kotlin ↔ Rust JNI; Tauri'nin kullandığı sürüm.
+[target.'cfg(target_os = "android")'.dependencies]
+jni = "0.21"
+
+[target.'cfg(any(target_os = "android", target_os = "ios"))'.dependencies]
+tauri-plugin-barcode-scanner = "2"

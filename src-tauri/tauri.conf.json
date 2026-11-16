@@ -1,0 +1,56 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Zodyvel",
+  "version": "0.9.0",
+  "identifier": "app.zodyvel.desktop",
+  "build": {
+    "beforeDevCommand": "cargo build -q -p zodyvel-hook --manifest-path src-tauri/Cargo.toml && pnpm dev",
+    "devUrl": "http://127.0.0.1:1420",
+    "beforeBuildCommand": "cargo build -q --release -p zodyvel-hook --manifest-path src-tauri/Cargo.toml && node scripts/copy-exe.mjs --hook && pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [
+      {
+        "label": "island",
+        "url": "index.html",
+        "title": "Zodyvel",
+        "width": 740,
+        "height": 460,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "maximizable": false,
+        "minimizable": false,
+        "shadow": false,
+        "focus": false,
+        "focusable": false,
+        "visible": false,
+        "additionalBrowserArgs": "--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection,CalculateNativeWinOcclusion"
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEUwQkJGN0ZCQUU2MTFBNDQKUldSRUdtR3UrL2U3NE1WaS84RzFqQ211THF4ekFOKzBjdkgwQVNpaDlpaHFhcGdWc1pwWFBaeDcK",
+      "endpoints": ["https://github.com/shadow-lo/zodyvel-releases/releases/latest/download/latest.json"],
+      "windows": { "installMode": "passive" }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "createUpdaterArtifacts": true,
+    "targets": ["nsis"],
+    "icon": ["icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.ico"],
+    "resources": { "../zodyvel-hook.exe": "zodyvel-hook.exe" },
+    "windows": {
+      "nsis": { "installMode": "currentUser", "installerHooks": "windows/hooks.nsh", "template": "windows/installer.nsi" }
+    }
+  }
+}

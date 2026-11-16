@@ -1,0 +1,19 @@
+[package]
+name = "zodyvel-phone-core"
+version = "0.0.1"
+edition = "2021"
+description = "Telefon uygulamasının Tauri'den bağımsız çekirdeği: eşleştirme, saklama, kilit penceresi, bağlantı denemesi"
+
+[dependencies]
+zodyvel-phone-proto = { path = "../../src-tauri/phone-proto", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+rand = "0.8"
+# G3: IP değişince bilgisayarı yerel ağda bulma (_zodyvel._tcp). Masaüstü duyurusuyla aynı sürüm.
+mdns-sd = "0.11"
+# T-D4: bellekteki Noise özel anahtarı bırakılınca sıfırlanır (snow zaten kullanıyor; yeni derleme yok).
+zeroize = "1"
+
+[dev-dependencies]
+zodyvel-phone-proto = { path = "../../src-tauri/phone-proto" }
+p256 = { version = "0.13", default-features = false, features = ["ecdsa", "std"] }

@@ -1,0 +1,42 @@
+# Bağımlılıklar ve derleme çıktıları / dependencies and build output
+node_modules/
+dist/
+target/
+src-tauri/target/
+src-tauri/gen/schemas/
+phone-app/src-tauri/gen/schemas/
+.vite/
+
+# Derlenmiş dosyalar / binaries
+*.exe
+*.msi
+*.apk
+*.aab
+*.so
+
+# Makineye özel ayarlar / machine-specific config
+.cargo/config.toml
+local.properties
+.env
+.env.*
+
+# Gizli anahtarlar: asla depoya girmez / secrets: never commit
+*.key
+*.key.pub
+*.jks
+*.keystore
+*.p12
+*.pem
+keystore.properties
+key.properties
+
+# Günlükler / logs
+*.log
+debug.log
+
+# Editör / editor
+.idea/
+.vscode/
+.claude/
+.DS_Store
+Thumbs.db

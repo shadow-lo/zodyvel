@@ -1,0 +1,90 @@
+[package]
+name = "zodyvel"
+version = "0.9.0"
+description = "Zodyvel: AI ajanları, müzik ve sistem yükü için hafif Windows adası"
+edition = "2024"
+publish = false
+default-run = "zodyvel"
+
+[workspace]
+members = ["hook", "phone-proto"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon"] }
+tauri-plugin-single-instance = "2"
+# Güncelleme (Faz 11): GitHub Releases + imza doğrulama. Yalnız Rust tarafından çağrılır.
+tauri-plugin-updater = "2"
+serde = { version = "1", features = ["derive"] }
+# Sıralı JSON: kullanıcının ayar dosyalarını düzenlerken anahtar sırası korunur.
+serde_json = { version = "1", features = ["preserve_order"] }
+zodyvel-hook = { path = "hook" }
+# Telefon köprüsü (Plan 3 · T2): Noise kanalı, eşleştirme, imzalı eylemler (kendi sınamaları kutuda).
+zodyvel-phone-proto = { path = "phone-proto" }
+# Tauri zaten derliyor; kapak resmini data: adresine çevirmek için.
+base64 = "0.23"
+# Zody araç sunucusu jetonu için işletim sistemi rastgeleliği (phone-proto ile aynı sürüm, ayrıca derlenmez).
+rand = "0.8"
+# Tauri'nin WebView2 bağlaması (aynı sürüm): boştayken WebView2'den önbellek bırakmasını istemek için.
+webview2-com = "0.39"
+# Tauri'nin kullandığı sürüm (ayrıca derlenmez): rafın kendi bırakma hedefi için COM arayüzü yazmak.
+windows-core = "0.62"
+# Tauri'nin kullandığı sürümle aynı: ayrıca derlenmez, ikili dosyayı büyütmez.
+windows = { version = "0.62", features = [
+  "Devices_Radios",
+  "Foundation",
+  "Foundation_Collections",
+  "Media_Control",
+  "Networking_Connectivity",
+  # Kaynaklar (Mail: TLS soket, GitHub: HTTP). Yeni paket yok, WinRT'nin kendisi.
+  "Networking_Sockets",
+  "Storage_Streams",
+  "Web_Http",
+  "Web_Http_Filters",
+  "Web_Http_Headers",
+  "Win32_Devices_FunctionDiscovery",
+  "Win32_Foundation",
+  "Win32_Graphics_Gdi",
+  "Win32_Media_Audio",
+  "Win32_Media_Audio_Endpoints",
+  "Win32_Security",
+  "Win32_Security_Authorization",
+  "Win32_Security_Credentials",
+  "Win32_Storage_FileSystem",
+  "Win32_System_Com",
+  "Win32_System_Com_StructuredStorage",
+  # Raf → AI: dosya yolunu panoya yazmak (CF_UNICODETEXT).
+  "Win32_System_DataExchange",
+  "Win32_System_IO",
+  "Win32_System_LibraryLoader",
+  "Win32_System_Memory",
+  "Win32_System_Ole",
+  "Win32_System_Performance",
+  "Win32_System_Pipes",
+  "Win32_System_Power",
+  "Win32_System_Registry",
+  "Win32_System_RemoteDesktop",
+  "Win32_System_SystemInformation",
+  "Win32_System_Threading",
+  "Win32_System_Variant",
+  "Win32_System_WinRT",
+  "Win32_UI_Accessibility",
+  "Win32_UI_HiDpi",
+  "Win32_UI_Input_KeyboardAndMouse",
+  "Win32_UI_Shell",
+  "Win32_UI_Shell_Common",
+  "Win32_UI_Shell_PropertiesSystem",
+  "Win32_UI_WindowsAndMessaging",
+] }
+
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+panic = "abort"
+strip = true

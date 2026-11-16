@@ -1,0 +1,5 @@
+# Bu dosyayı `.cargo/config.toml` olarak kopyalayıp yolu kendi makinene göre düzenle.
+# Proje OneDrive içindeyse Rust derleme çıktısını (birkaç GB, binlerce dosya)
+# eşitlenmeyen bir klasöre yönlendirmek derlemeyi hızlandırır ve dosya kilitlenmesini önler.
+[build]
+target-dir = "C:/Users/KULLANICI/AppData/Local/Zodyvel/build/target"

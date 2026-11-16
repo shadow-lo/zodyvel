@@ -1,0 +1,4 @@
+# Bu eklentinin komutları webview'dan ÇAĞRILMAZ: yalnız uygulamanın Rust kodu kullanır. Bu yüzden varsayılan izin boş.
+[default]
+description = "Webview'a hiçbir Keystore komutu açılmaz."
+permissions = []
